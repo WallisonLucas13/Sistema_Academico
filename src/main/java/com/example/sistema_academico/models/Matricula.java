@@ -17,6 +17,14 @@ public class Matricula {
     @Column
     private String matricula;
 
+    public TipoAcademico getTipoAcademico() {
+        return tipoAcademico;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
     public static class MatriculaBuilder{
 
         private Matricula matricula = new Matricula();
