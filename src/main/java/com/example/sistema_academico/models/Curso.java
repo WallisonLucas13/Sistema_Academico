@@ -2,6 +2,8 @@ package com.example.sistema_academico.models;
 
 import com.example.sistema_academico.enums.TipoCurso;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Curso {
     private Long id;
 
     @Column
+    @NotBlank
     private String nome;
 
     @Column
@@ -24,6 +27,7 @@ public class Curso {
     private List<Materia> materias;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TipoCurso tipo;
 
     @Column

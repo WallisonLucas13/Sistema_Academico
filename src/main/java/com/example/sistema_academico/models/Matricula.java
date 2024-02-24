@@ -2,16 +2,17 @@ package com.example.sistema_academico.models;
 
 import com.example.sistema_academico.enums.TipoAcademico;
 import com.example.sistema_academico.services.GeradorMatriculaService;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
 
 @Entity
 public class Matricula {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private TipoAcademico tipoAcademico;
