@@ -29,8 +29,7 @@ public class Matricula {
 
     public static class MatriculaBuilder{
 
-        @Autowired
-        private GeradorMatriculaService geradorMatriculaService;
+        private final GeradorMatriculaService geradorMatriculaService = new GeradorMatriculaService();
 
         private Matricula matricula = new Matricula();
 

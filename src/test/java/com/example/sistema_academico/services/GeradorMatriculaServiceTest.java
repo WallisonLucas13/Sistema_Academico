@@ -1,6 +1,7 @@
 package com.example.sistema_academico.services;
 
 import com.example.sistema_academico.enums.TipoAcademico;
+import com.example.sistema_academico.models.Matricula;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,20 +17,26 @@ public class GeradorMatriculaServiceTest {
     @Test
     public void deveGerarMatriculaDeAluno(){
         //Acao
-        String matricula = geradorMatriculaService.gerarMatricula(TipoAcademico.ALUNO);
+        Matricula matricula = Matricula.MatriculaBuilder.builder()
+                .tipoAcademico(TipoAcademico.ALUNO)
+                .build();
 
         //Verification
-        Assert.assertEquals(matricula.length(), 10);
-        Assert.assertTrue(matricula.contains("AL"));
+        Assert.assertEquals(10, matricula.getMatricula().length());
+        Assert.assertEquals(TipoAcademico.ALUNO, matricula.getTipoAcademico());
+        Assert.assertTrue(matricula.getMatricula().contains("AL"));
     }
 
     @Test
     public void deveGerarMatriculaDeProfessor(){
         //Acao
-        String matricula = geradorMatriculaService.gerarMatricula(TipoAcademico.PROFESSOR);
+        Matricula matricula = Matricula.MatriculaBuilder.builder()
+                .tipoAcademico(TipoAcademico.PROFESSOR)
+                .build();
 
         //Verification
-        Assert.assertEquals(matricula.length(), 10);
-        Assert.assertTrue(matricula.contains("PR"));
+        Assert.assertEquals(10, matricula.getMatricula().length());
+        Assert.assertEquals(TipoAcademico.PROFESSOR, matricula.getTipoAcademico());
+        Assert.assertTrue(matricula.getMatricula().contains("PR"));
     }
 }
