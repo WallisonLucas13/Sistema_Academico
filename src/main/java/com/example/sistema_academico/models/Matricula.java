@@ -1,10 +1,12 @@
 package com.example.sistema_academico.models;
 
 import com.example.sistema_academico.enums.TipoAcademico;
+import com.example.sistema_academico.services.GeradorMatriculaService;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
 
@@ -27,6 +29,9 @@ public class Matricula {
 
     public static class MatriculaBuilder{
 
+        @Autowired
+        private GeradorMatriculaService geradorMatriculaService;
+
         private Matricula matricula = new Matricula();
 
         public static MatriculaBuilder builder(){
@@ -39,29 +44,9 @@ public class Matricula {
         }
 
         public Matricula build(){
-            matricula.matricula = builder().GerarMatricula(matricula.tipoAcademico);
+            matricula.matricula = geradorMatriculaService.gerarMatricula(matricula.tipoAcademico);
             return matricula;
         }
 
-        //FUNÇÃO RESPONSÁVEL POR GERAR UMA MATRICULA ALEATÓRIA DE 8 DÍGITOS
-        private String GerarMatricula(TipoAcademico tipoAcademico){
-
-            int size = 8;
-            Random random = new Random();
-            String matricula = "";
-
-            for (int i = 0; i <= size; i++) {
-                matricula += String.valueOf(random.nextInt(10));
-            }
-
-            if(tipoAcademico.name().equals("ALUNO")){
-                matricula += "AL";
-                return matricula;
-            }
-
-            matricula += "PR";
-            return matricula;
-
-        }
     }
 }
