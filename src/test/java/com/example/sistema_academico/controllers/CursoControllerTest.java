@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -27,6 +28,8 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
+//Melhor para testes em Camadas de Controller, onde toda a aplicação precisa inicializar
+//E todas as dependencias precisam ser mockadas
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -35,14 +38,10 @@ public class CursoControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    //MOCKBEAN mocka a camada de service e todas as dependencias anteriores a ela
+    //Portanto não é necessario mockar também o Repository
+    @MockBean
     private CursoService cursoService;
-
-    @Mock
-    private CursoRepository cursoRepository;
-
-    @InjectMocks
-    private CursoController cursoController;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -57,7 +56,6 @@ public class CursoControllerTest {
                 .build();
 
         //Mocking
-        Mockito.when(cursoRepository.save(any(Curso.class))).thenReturn(curso);
         Mockito.when(cursoService.save(any(Curso.class))).thenReturn(true);
 
         //Acao

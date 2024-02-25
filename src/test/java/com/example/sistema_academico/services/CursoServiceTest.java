@@ -15,12 +15,16 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
+//Melhor para testes em Camadas de Service etc... Quando o acesso a função testada é interno
+//Sem que haja a interação com protocolos HTTP
 @RunWith(MockitoJUnitRunner.class)
 public class CursoServiceTest {
 
+    //Mock mocka apenas o Repository
     @Mock
     private CursoRepository repository;
 
+    //InjectMocks injeta os mocks na classe alvo de teste
     @InjectMocks
     private CursoService cursoService;
 
